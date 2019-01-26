@@ -103,6 +103,9 @@ void Widget::on_pushButton_6_clicked()
     {
         QString fileName;
         fileNames =  fileDialog->selectedFiles();
+    }else
+    {
+        return;
     }
     QString exePath = fileNames[0];
     qDebug() << exePath;
@@ -256,6 +259,7 @@ void Widget::on_pushButton_4_clicked()
     entry.dwSize = sizeof(entry);// 长度必须赋值
     BOOL ret = Module32First(snapHandele,&entry);
     int i = 0;
+    HMODULE a = NULL;
     while (ret) {
         QString dllFile = QString::fromWCharArray(entry.szModule);
         QString dllPath = QString::fromWCharArray(entry.szExePath);
