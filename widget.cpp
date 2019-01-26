@@ -127,7 +127,7 @@ void Widget::on_pushButton_6_clicked()
 
 }
 
- // 结束进程
+// 结束进程
 void Widget::on_pushButton_clicked()
 {
 
@@ -240,9 +240,10 @@ void Widget::on_pushButton_4_clicked()
     int rowCount = ui->dllTab->rowCount();
     for( int i = 0; i < rowCount; i++ )
     {
-        ui->processTab->removeRow(0);
+        ui->dllTab->removeRow(0);
     }
     uint pid = getPid();
+    qDebug() << "pid = " << pid;
 
 
     HANDLE snapHandele = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE ,pid);
