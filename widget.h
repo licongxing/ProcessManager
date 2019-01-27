@@ -21,6 +21,11 @@ private:
     uint getPid();
     // 提升权限
     void upRole();
+
+    // 清空进程表
+    void clearProcTab();
+    // 清空DLL表
+    void clearDLLTab();
 signals:
     // 刷新进程表
     void refreshProcTab();
@@ -36,6 +41,10 @@ private slots:
     void on_pushButton_3_clicked();
 
     void on_pushButton_4_clicked();
+
+    void on_pushButton_7_clicked();
+
+    void on_pushButton_8_clicked();
 
 private:
     Ui::Widget *ui;

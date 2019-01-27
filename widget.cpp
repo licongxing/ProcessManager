@@ -27,15 +27,29 @@ uint Widget::getPid()
     return pid;
 }
 
-// 枚举进程
-void Widget::enumProcess()
+// 清空进程表
+void Widget::clearProcTab()
 {
-    // 清空表格
     int rowCount = ui->processTab->rowCount();
     for( int i = 0; i < rowCount; i++ )
     {
         ui->processTab->removeRow(0);
     }
+}
+// 清空DLL表
+void Widget::clearDLLTab()
+{
+    int rowCount = ui->dllTab->rowCount();
+    for( int i = 0; i < rowCount; i++ )
+    {
+        ui->dllTab->removeRow(0);
+    }
+}
+
+// 枚举进程
+void Widget::enumProcess()
+{
+    clearProcTab();
 
     HANDLE snapHandele = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS,NULL);
     if( INVALID_HANDLE_VALUE == snapHandele)
@@ -239,12 +253,7 @@ void Widget::on_pushButton_3_clicked()
 // 必须提权，提权操作在upRole函数中
 void Widget::on_pushButton_4_clicked()
 {
-    // 清空表格
-    int rowCount = ui->dllTab->rowCount();
-    for( int i = 0; i < rowCount; i++ )
-    {
-        ui->dllTab->removeRow(0);
-    }
+    clearDLLTab();
     uint pid = getPid();
     qDebug() << "pid = " << pid;
 
@@ -270,4 +279,17 @@ void Widget::on_pushButton_4_clicked()
         ret = Module32Next(snapHandele,&entry);
     }
     CloseHandle(snapHandele);
+}
+
+void Widget::on_pushButton_7_clicked()
+{
+    // 刷新进程表
+    clearDLLTab();
+    enumProcess();
+}
+
+void Widget::on_pushButton_8_clicked()
+{
+    // 刷新DLL表
+    on_pushButton_4_clicked();
 }
